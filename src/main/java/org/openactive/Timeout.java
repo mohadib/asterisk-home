@@ -16,7 +16,8 @@ public class Timeout extends BaseAgiScript
 		FileInputStream fis = new FileInputStream( "/etc/asterisk/agi.props" );
 		Properties agiProperites = new Properties();
 		agiProperites.load( fis );
-		timeoutInMinutes = (long) agiProperites.getOrDefault( "doorbell.timeout.minutes", 10 );
+		String timeoutStr = agiProperites.getOrDefault( "doorbell.timeout.minutes", "10" ).toString();
+		timeoutInMinutes = Long.parseLong( timeoutStr );
 	}
 
 	public void service( AgiRequest agiRequest, AgiChannel agiChannel ) throws AgiException
